@@ -5,7 +5,7 @@ export const site = {
   handle: 'scholasticstan',
   title: 'Frontend Engineer & Founder',
   tagline:
-    'Frontend engineer who ships the whole feature. Founder of Payroid, a live fintech; contract builder of the Bethadel Media site; author of LinkBolt. React, TypeScript, Node, Postgres, Astro. Available now for frontend or full-stack roles, remote across EMEA or in Nigeria.',
+    'Frontend engineer who ships the whole feature. Founder of Payroid, a live fintech with a web app, operator console and Flutter app; contract builder of the Bethadel Media site; author of LinkBolt. Next.js, TypeScript, Postgres, Flutter, Astro. Available now for frontend or full-stack roles, remote across EMEA or in Nigeria.',
   location: 'Nigeria',
   email: 'hello@scholasticstanley.com',
   linkedin: 'https://www.linkedin.com/in/scholasticstan',
@@ -26,12 +26,12 @@ export const nav = [
 
 // What an employer gets. Every line is backed by something in the repos.
 export const offer = [
-  { title: 'Whole products, not just screens', body: 'Payroid is a live fintech I founded and built. The Bethadel Media site went from brief to launch in a week, including email and deployment. LinkBolt has a UI, server actions, a Postgres schema and a JSON API from one person.' },
+  { title: 'Whole products, not just screens', body: 'Payroid is a live fintech I founded and built: customer app, operator console and Flutter app, about 94k lines. The Bethadel Media site went from brief to launch in a week. LinkBolt has a UI, server actions, a Postgres schema and a JSON API.' },
   { title: 'Tests and CI from the first commit', body: '33 tests, unit and integration, run in GitHub Actions on every push with a real Postgres service. Lint, typecheck, build. Nothing merges red.' },
   { title: 'Performance decisions I can explain', body: 'Redirects answer from a bounded cache and record the click after the response is sent. I can tell you why it is a 302 and not a 301, and what that costs.' },
   { title: 'Foundations below the framework', body: 'I wrote a Unix shell and printf in C during ALX. When a React abstraction leaks, I know what it is hiding.' },
   { title: 'Readable code, readable PRs', body: 'Small commits, comments that say why, READMEs that list the trade-offs. The next engineer should not need me in the room.' },
-  { title: 'Product sense', body: 'Bots are counted separately instead of dropped, uniques are hashed instead of IPs stored, custom slugs cannot shadow app routes. Details a user notices.' },
+  { title: 'Product sense', body: 'Payroid locks the rate at submit and refuses a KYC backdoor for app reviewers. LinkBolt counts bots separately and hashes visitors instead of storing IPs. Details a user notices.' },
 ];
 
 export const stats = [

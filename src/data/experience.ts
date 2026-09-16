@@ -12,12 +12,12 @@ export const experience: Experience[] = [
     role: 'Founder & Lead Engineer',
     company: 'Payroid',
     url: 'https://payroid.co/',
-    period: 'Present', // TODO: add the founding year, e.g. "2025 – Present"
-    summary: 'Gift card to naira exchange and bill payments. My company; I designed and built the product.',
+    period: 'May 2026 – Present',
+    summary: 'Gift cards and crypto to naira, plus bill payments. My company; I designed and built all of it.',
     highlights: [
-      'Built the web app end to end: card submission, rate and fee confirmation, signed receipts, bank payouts, bill payments.',
-      'Run the product day to day: pricing, card review, support, and what ships next.',
-      'Live and taking real trades; mobile apps are the next release.',
+      'Customer web app, operator console and Flutter mobile app from one monorepo: Next.js 16, TypeScript, Postgres via Drizzle. About 94k lines.',
+      'KYC tiers (BVN, NIN, selfie), passkey and OTP sign-in, transaction PIN, wallet, payouts, bill payments, receipts, push notifications.',
+      'Three hosts from one deployment through an edge proxy; a Fly.io static-IP proxy for Flutterwave; treasury cron; audit-logged operator desks.',
     ],
   },
   {

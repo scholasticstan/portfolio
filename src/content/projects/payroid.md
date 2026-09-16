@@ -1,8 +1,8 @@
 ---
 title: Payroid
-description: A fintech I founded and built. People exchange foreign gift cards for naira paid to their bank account, and pay bills in the same app.
+description: A fintech I founded and built. Nigerians sell gift cards and crypto for naira at a rate locked the moment they submit, and pay bills from the same wallet. Web app, operator console, Flutter mobile app.
 date: 2026-09-01
-tags: [Fintech, Founder, Web app, Payments]
+tags: [Next.js, TypeScript, PostgreSQL, Drizzle, Flutter, Fintech]
 featured: true
 live: https://payroid.co/
 accent: '#9d8cff'
@@ -10,21 +10,31 @@ accent: '#9d8cff'
 
 ## What it is
 
-Payroid takes gift cards that cannot be spent in Nigeria (Amazon, Apple, Steam, PlayStation, Xbox and over 100 others) and turns them into naira in the user's own bank account. Airtime, data, electricity, cable and internet payments sit alongside, so the balance is useful the moment it lands.
+Payroid turns gift cards that cannot be spent in Nigeria (Amazon, Apple, Steam, PlayStation, Xbox and over 100 others) and crypto into naira in the user's own bank account. The rate is locked the moment a trade is submitted. A person reviews every card before money moves, and payouts land in minutes. Airtime, data, electricity, cable and internet payments sit in the same wallet. It is operated by Payroid Synergy Limited, a registered Nigerian company.
 
-## What I built
+I founded it in May 2026 and I have built all of it.
 
-The whole product. The trade flow: pick a card type, submit it as a code, receipt or photo, see the rate and fee before confirming, get a signed receipt that records the rate, fee, timestamp and receiving bank. The review queue where a person checks each card before money moves. The payout to the bank. The bill-payment integrations.
+## What is in the box
 
-## Decisions
+One repository, four deliverables:
 
-- **Show the rate and fee before the user commits.** Most competitors show it after. It costs some conversions and earns the trust that brings people back.
-- **A person reviews every card.** Slower than automated checks, and the reason chargebacks stay low.
-- **No wallet to withdraw from.** Money goes straight to the user's bank. One fewer thing to explain, one fewer thing to secure.
-- **Signed receipts.** Every trade leaves the user with a document that can settle a dispute.
+- **The customer app** (Next.js 16, React 19, TypeScript). Sign in by emailed code, password or passkey, with two-factor and a transaction PIN that guards every payment. KYC in tiers: BVN, NIN, selfie, address. Wallet top-up and withdrawal, bank accounts and beneficiaries, sell gift cards, buy gift cards, sell crypto, pay bills, receipts, statements, referrals, device management, account closure.
+- **The operator console.** Trade and card review desks, gift card and country rate tables, crypto trades, bill runs, a compliance queue, support tickets, treasury with a scheduled sweep, account management, and an internal mail suite. Each desk sees only its own work.
+- **The mobile app** (Flutter). Same account, biometric unlock, secure storage, push notifications for money movements.
+- **A static-IP proxy** on Fly.io, because Flutterwave's live API whitelists source addresses and Vercel functions egress from a rotating pool.
 
-## Status
+Behind it: Postgres through Drizzle, web push, webhooks through Svix, per-component health endpoints, Vitest.
 
-Live and taking real trades. Operated by Payroid Synergy Limited, a registered Nigerian company. Mobile apps are the next release.
+## Decisions I would defend
 
-<!-- TODO: add the stack (framework, backend, payment rails) and any numbers you are comfortable sharing. -->
+**Three hosts, one app.** payroid.co, app.payroid.co and admin.payroid.co are served by one Next.js deployment. An edge proxy verifies the right session cookie with Web Crypto and rewrites to clean URLs, so users never see an `/app` prefix or an auth redirect.
+
+**Lock the rate at submit.** Competitors quote after review, when the user can no longer walk away. Payroid shows the rate and fee first and holds it. It costs margin on volatile days and it is the whole pitch.
+
+**No reviewer backdoor.** Apple needs working credentials to review a login-gated app. The easy route is an `isReviewAccount` flag that skips KYC. In a regulated money app that flag is a backdoor, so instead a real account is verified by an operator with an audit note and funded with real money.
+
+**The PIN guards the vault, not the door.** Signing in is easy. Moving money asks again, every time.
+
+## Scale
+
+324 commits since May 2026. About 94,000 lines of TypeScript across 424 files, plus 112 Dart files for the mobile app. Live and taking real trades; the mobile apps are in store review.

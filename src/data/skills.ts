@@ -12,10 +12,11 @@ export const skillGroups: SkillGroup[] = [
       { name: 'React', level: 5 },
       { name: 'JavaScript', level: 5 },
       { name: 'TypeScript', level: 4 },
-      { name: 'Next.js (App Router, server actions)', level: 4 },
+      { name: 'Next.js (App Router, server actions)', level: 5 },
       { name: 'HTML & CSS', level: 5 },
       { name: 'Tailwind CSS', level: 5 },
-      { name: 'Astro', level: 3 },
+      { name: 'Astro', level: 4 },
+      { name: 'Flutter / Dart', level: 3 },
     ],
   },
   {
@@ -23,12 +24,13 @@ export const skillGroups: SkillGroup[] = [
     description: 'Enough to own a feature end to end.',
     skills: [
       { name: 'Node.js & Express', level: 4 },
-      { name: 'PostgreSQL & Drizzle', level: 3 },
+      { name: 'PostgreSQL & Drizzle', level: 4 },
       { name: 'MongoDB', level: 3 },
       { name: 'Python & Flask', level: 3 },
       { name: 'Firebase', level: 3 },
       { name: 'REST API design', level: 4 },
-      { name: 'Auth, sessions, rate limiting', level: 3 },
+      { name: 'Auth: OTP, passkeys, PIN, sessions', level: 4 },
+      { name: 'Payments & webhooks (Flutterwave, Svix)', level: 3 },
     ],
   },
   {
@@ -51,12 +53,12 @@ export const skillGroups: SkillGroup[] = [
       { name: 'Vitest & testing', level: 3 },
       { name: 'GitHub Actions CI', level: 3 },
       { name: 'Vercel & Netlify', level: 4 },
-      { name: 'Docker (basics)', level: 2 },
+      { name: 'Docker & Fly.io', level: 3 },
       { name: 'SEO & digital marketing', level: 3 },
     ],
   },
 ];
 
 export const tools = [
-  'VS Code', 'Postman', 'Figma', 'Chrome DevTools', 'Lighthouse', 'Zod', 'Drizzle Kit', 'React Router', 'jQuery', 'Bootstrap', 'Vite', 'npm',
+  'VS Code', 'Postman', 'Figma', 'Chrome DevTools', 'Lighthouse', 'Zod', 'Drizzle Kit', 'pnpm workspaces', 'Web Push', 'WebAuthn', 'Resend', 'Vite',
 ];
