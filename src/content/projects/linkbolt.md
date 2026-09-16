@@ -5,6 +5,7 @@ date: 2026-09-16
 tags: [Next.js, TypeScript, PostgreSQL, Drizzle, Vitest, GitHub Actions]
 featured: true
 repo: https://github.com/scholasticstan/linkbolt
+live: https://linkbolt-jet.vercel.app
 accent: '#7c9cff'
 ---
 

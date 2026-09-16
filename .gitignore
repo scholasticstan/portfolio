@@ -6,3 +6,4 @@ dist/
 
 # personal notes (LinkedIn copy, cleanup steps); remove this line to track them
 notes/
+.vercel
