@@ -1,0 +1,97 @@
+---
+import { site, stats } from '../data/site';
+---
+
+<section class="hero container" id="top">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      {site.available && (
+        <span class="status"><span class="dot"></span> Available for new work</span>
+      )}
+      <h1>
+        Hi, I'm <span class="grad">{site.name}</span>.<br />
+        I build web apps in React and Node, and I like the parts most people skip.
+      </h1>
+      <p class="lead">{site.tagline}</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="/projects/linkbolt/">Read the LinkBolt case study</a>
+        <a class="btn" href="#contact">Get in touch</a>
+        {site.github && <a class="btn" href={site.github} target="_blank" rel="noopener">GitHub ↗</a>}
+        <a class="btn" href={site.linkedin} target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <div class="terminal" aria-hidden="true">
+      <div class="term-bar"><span></span><span></span><span></span><em>~/portfolio</em></div>
+      <pre><code><span class="c-p">$</span> whoami
+<span class="c-o">{site.handle}</span>
+<span class="c-p">$</span> cat role.txt
+<span class="c-o">{site.title}</span>
+<span class="c-p">$</span> ls skills/
+<span class="c-k">react/  node/  postgres/  c/</span>
+<span class="c-p">$</span> uptime
+<span class="c-o">payroid.co by day, linkbolt by night</span>
+<span class="c-p">$</span> <span class="cursor"></span></code></pre>
+    </div>
+  </div>
+
+  <ul class="stats">
+    {stats.map((s) => (
+      <li><strong>{s.value}</strong><span>{s.label}</span></li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .hero { padding: clamp(4rem, 10vw, 8rem) 0 3rem; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 3rem; align-items: center; }
+  .status {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-2);
+    background: color-mix(in srgb, var(--accent-2) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent-2) 35%, transparent);
+    border-radius: 999px; padding: 0.3rem 0.8rem; margin-bottom: 1.25rem;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-2); box-shadow: 0 0 0 0 var(--accent-2); animation: pulse 2s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 60%, transparent); } 70% { box-shadow: 0 0 0 8px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+  .grad {
+    background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lead { max-width: 560px; font-size: 1.1rem; }
+  .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+
+  .terminal {
+    background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: 0 30px 80px -30px var(--glow); overflow: hidden; font-size: 0.85rem;
+  }
+  .term-bar { display: flex; align-items: center; gap: 6px; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--border); background: var(--bg-card); }
+  .term-bar span { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+  .term-bar span:nth-child(1) { background: #ff5f57; }
+  .term-bar span:nth-child(2) { background: #febc2e; }
+  .term-bar span:nth-child(3) { background: #28c840; }
+  .term-bar em { margin-left: auto; font-family: var(--font-mono); font-style: normal; color: var(--text-dim); font-size: 0.75rem; }
+  .terminal pre { margin: 0; border: 0; border-radius: 0; background: none; padding: 1rem 1.1rem; line-height: 1.7; }
+  .c-p { color: var(--accent-2); }
+  .c-o { color: var(--text); }
+  .c-k { color: var(--accent); }
+  .cursor { display: inline-block; width: 8px; height: 1em; background: var(--accent); vertical-align: text-bottom; animation: blink 1s steps(2) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .stats {
+    list-style: none; margin: 4rem 0 0; padding: 0;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  }
+  .stats li {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.15rem;
+  }
+  .stats strong { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; color: var(--accent); }
+  .stats span { color: var(--text-muted); font-size: 0.9rem; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) { .dot, .cursor { animation: none; } }
+</style>

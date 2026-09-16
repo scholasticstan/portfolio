@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import ProjectCard from './ProjectCard.astro';
+
+const all = (await getCollection('projects')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const featured = all.filter((p) => p.data.featured);
+const rest = all.filter((p) => !p.data.featured);
+---
+
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Projects</div>
+      <h2>Things I have built.</h2>
+      <p class="lead">One product I built from scratch this year, and the systems work from ALX that shaped how I build. Every entry links to the source.</p>
+    </div>
+
+    <div class="grid featured">{featured.map((p) => <ProjectCard project={p} />)}</div>
+    {rest.length > 0 && (
+      <>
+        <h3 class="more reveal">More projects</h3>
+        <div class="grid">{rest.map((p) => <ProjectCard project={p} />)}</div>
+      </>
+    )}
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+  .more { margin: 2.5rem 0 1rem; color: var(--text-muted); font-size: 1rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; }
+  @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
+</style>

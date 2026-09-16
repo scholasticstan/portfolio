@@ -1,0 +1,44 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="section-head reveal">
+      <div class="eyebrow">About</div>
+      <h2>Frontend by trade. Curious about the layers underneath.</h2>
+    </div>
+    <div class="about-body reveal">
+      <p>
+        I'm {site.name}, a frontend developer in {site.location}. I work at
+        <a href={site.company.url} target="_blank" rel="noopener">{site.company.name}</a> on the web app, and before that I
+        freelanced, building React sites and small apps for clients.
+      </p>
+      <p>
+        I came to the web through the ALX software engineering programme, which starts you in C and Linux before it
+        lets you near a browser. Writing a shell and a printf implementation changed how I read framework code: I want to
+        know what the abstraction is hiding. That is why my latest project, LinkBolt, has notes on why it uses a 302 and
+        not a 301, and why the click is recorded after the response goes out.
+      </p>
+      <p>
+        Day to day that means React and TypeScript, Node, Postgres or MongoDB, Tailwind, tests that run in CI, and
+        readable pull requests. I like small teams where I can own a feature from the ticket to production.
+      </p>
+      <ul class="facts">
+        <li><span>Based in</span><strong>{site.location}</strong></li>
+        <li><span>Focus</span><strong>React, TypeScript, Node, Postgres</strong></li>
+        <li><span>Currently</span><strong>Frontend Developer at {site.company.name}</strong></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; }
+  .about-body { color: var(--text-muted); font-size: 1.05rem; }
+  .facts { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 0.75rem; }
+  .facts li { display: grid; grid-template-columns: 110px 1fr; border-top: 1px solid var(--border); padding-top: 0.75rem; }
+  .facts span { font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); }
+  .facts strong { color: var(--text); font-weight: 600; }
+  @media (max-width: 800px) { .about-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+</style>

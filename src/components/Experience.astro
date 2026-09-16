@@ -1,0 +1,64 @@
+---
+import { experience, education } from '../data/experience';
+---
+
+<section class="section" id="experience">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Experience</div>
+      <h2>Where I've worked.</h2>
+    </div>
+    <ol class="timeline">
+      {experience.map((e) => (
+        <li class="reveal">
+          <div class="meta">
+            <span class="period">{e.period}</span>
+          </div>
+          <div class="body card">
+            <h3>{e.role} <span class="at">@ {e.url ? <a href={e.url} target="_blank" rel="noopener">{e.company}</a> : e.company}</span></h3>
+            <p class="summary">{e.summary}</p>
+            <ul class="hl">{e.highlights.map((h) => <li>{h}</li>)}</ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <h3 class="sub reveal">Education &amp; certifications</h3>
+    <ul class="edu">
+      {education.map((ed) => (
+        <li class="card reveal">
+          <span class="period">{ed.period}</span>
+          <strong>{ed.title}</strong>
+          <span class="detail">{ed.detail}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 1.5rem; }
+  .timeline > li { display: grid; grid-template-columns: 160px 1fr; gap: 1.5rem; position: relative; }
+  .meta { padding-top: 1.5rem; position: relative; }
+  .meta::after {
+    content: ''; position: absolute; right: -0.75rem; top: 2rem; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
+    transform: translateX(50%);
+  }
+  .period { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); }
+  .at { color: var(--accent); font-weight: 500; }
+  .at a { color: inherit; }
+  .sub { margin: 3rem 0 1rem; color: var(--text-muted); font-size: 1rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; }
+  .edu { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .edu li { display: flex; flex-direction: column; gap: 0.25rem; }
+  .edu strong { font-size: 1.05rem; }
+  .detail { color: var(--text-muted); font-size: 0.95rem; }
+  .summary { color: var(--text-muted); }
+  .hl { margin: 0; padding-left: 1.1rem; color: var(--text-muted); font-size: 0.95rem; display: grid; gap: 0.35rem; }
+  @media (max-width: 720px) {
+    .edu { grid-template-columns: 1fr; }
+    .timeline > li { grid-template-columns: 1fr; gap: 0.5rem; }
+    .meta { padding-top: 0; }
+    .meta::after { display: none; }
+  }
+</style>
