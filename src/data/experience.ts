@@ -33,6 +33,18 @@ export const experience: Experience[] = [
     ],
   },
   {
+    role: 'Volunteer Full-Stack Developer',
+    company: 'Flex Gloss',
+    url: 'https://flexgloss.vercel.app',
+    period: 'Mar – Apr 2026',
+    summary: 'Car detailing business in Benin City. Built their booking, shop and back office from scratch, unpaid.',
+    highlights: [
+      'React, Express and Supabase: bookings with confirmations and reminders, packages, gift cards, product shop with Paystack checkout, referrals, loyalty, reviews, job tracking.',
+      'Staff portal and admin area with service reports, stock movements and an audit log. Auth by OTP, CSRF, rate limiting, sanitising.',
+      'Playwright end-to-end tests, CI, and Lighthouse CI on every push. About 25k lines of TypeScript.',
+    ],
+  },
+  {
     role: 'Frontend Developer',
     company: 'ManandMicrobes',
     period: 'Aug 2023 – Mar 2024',
