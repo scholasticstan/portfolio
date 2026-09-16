@@ -1,0 +1,40 @@
+---
+// Brand marks from the simple-icons package (CC0), resolved at build time.
+// Unknown names render nothing, so the caller's text label still stands on its own.
+import * as si from 'simple-icons';
+
+interface Props { name: string; size?: number; class?: string }
+const { name, size = 14, class: cls = '' } = Astro.props;
+
+// Skill and tag labels are written for people; map them to a brand where one applies.
+const aliases: Record<string, string> = {
+  'Tailwind': 'Tailwind CSS', 'Postgres': 'PostgreSQL', 'PostgreSQL & Drizzle': 'PostgreSQL', 'Node': 'Node.js',
+  'HTML & CSS': 'HTML5', 'HTML5 & CSS3': 'HTML5', 'JavaScript (ES2023+)': 'JavaScript',
+  'Next.js (App Router, server actions)': 'Next.js', 'Node.js & Express': 'Node.js', 'MongoDB & Mongoose': 'MongoDB',
+  'Python & Flask': 'Python', 'Firebase (Auth, Firestore)': 'Firebase', 'Git & GitHub': 'Git',
+  'Vite & build tooling': 'Vite', 'Vitest & testing': 'Vitest', 'GitHub Actions CI': 'GitHub Actions',
+  'Vercel & Netlify': 'Vercel', 'Docker & Fly.io': 'Docker', 'Flutter / Dart': 'Flutter',
+  'Linux & shell scripting': 'Linux', 'MySQL & SQLAlchemy': 'MySQL', 'Drizzle Kit': 'Drizzle',
+  'pnpm workspaces': 'pnpm', 'React Context & Hooks': 'React', 'REST API design & integration': '',
+  'Web Push': '', 'WebAuthn': 'WebAuthn', 'Chrome DevTools': '', 'Framer Motion': '', 'Playwright': '', 'Paystack': '',
+};
+
+const key = name in aliases ? aliases[name] : name;
+const slug = key ? 'si' + key.replace(/\+/g, 'plus').replace(/\./g, 'dot').replace(/[^A-Za-z0-9]/g, '').toLowerCase().replace(/^./, (c) => c.toUpperCase()) : '';
+const icon = slug ? (si as unknown as Record<string, { path: string; hex: string; title: string } | undefined>)[slug] : undefined;
+
+// Black-on-dark brands (Next.js, Vercel, GitHub, Express, Resend) would vanish; let them inherit text colour.
+function luminance(hex: string) {
+  const n = parseInt(hex, 16);
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  return (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+}
+const fill = icon ? (luminance(icon.hex) < 0.2 ? 'currentColor' : `#${icon.hex}`) : '';
+---
+{icon && (
+  <svg class={`ti ${cls}`} width={size} height={size} viewBox="0 0 24 24" fill={fill} aria-hidden="true" focusable="false"><path d={icon.path} /></svg>
+)}
+
+<style>
+  .ti { flex: none; vertical-align: -0.15em; }
+</style>

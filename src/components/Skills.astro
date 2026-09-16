@@ -1,11 +1,12 @@
 ---
 import { skillGroups, tools } from '../data/skills';
+import TechIcon from './TechIcon.astro';
 ---
 
 <section class="section skills" id="skills">
   <div class="container">
     <div class="section-head reveal">
-      <div><div class="kicker">Skills</div><h2>What I work with.</h2></div>
+      <div><h2>What I work with.</h2></div>
       <p>Grouped by layer. Bold means I use it every week; the rest I have shipped with but would still open the docs.</p>
     </div>
     <div class="groups">
@@ -14,14 +15,14 @@ import { skillGroups, tools } from '../data/skills';
           <div class="ghead"><span class="num">0{gi + 1}</span><h3>{g.title}</h3></div>
           <p class="desc">{g.description}</p>
           <ul>
-            {g.skills.map((s) => <li class:list={['chip', { strong: s.level >= 4 }]}>{s.name}</li>)}
+            {g.skills.map((s) => <li class:list={['chip', { strong: s.level >= 4 }]}><TechIcon name={s.name} /> {s.name}</li>)}
           </ul>
         </div>
       ))}
     </div>
     <div class="tools reveal">
       <span class="label">Also</span>
-      {tools.map((t) => <span class="chip faint">{t}</span>)}
+      {tools.map((t) => <span class="chip faint"><TechIcon name={t} size={12} /> {t}</span>)}
     </div>
   </div>
 </section>
@@ -35,7 +36,7 @@ import { skillGroups, tools } from '../data/skills';
   h3 { font-size: 1.5rem; }
   .desc { color: var(--dim); font-size: 0.9rem; }
   ul { list-style: none; padding: 0; margin: 0.25rem 0 0; display: flex; flex-wrap: wrap; gap: 0.45rem; }
-  .chip { font-size: 0.85rem; padding: 0.4rem 0.75rem; border-radius: 999px; border: 1px solid var(--line-2); color: var(--muted); }
+  .chip { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; padding: 0.4rem 0.75rem; border-radius: 999px; border: 1px solid var(--line-2); color: var(--muted); }
   .chip.strong { color: var(--text); border-color: color-mix(in srgb, var(--accent) 60%, transparent); background: color-mix(in srgb, var(--accent) 10%, transparent); font-weight: 600; }
   .chip.faint { font-size: 0.78rem; color: var(--dim); }
   .tools { margin-top: 1.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; }

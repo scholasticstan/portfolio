@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import LinkBoltMock from '../../components/LinkBoltMock.astro';
+import TechIcon from '../../components/TechIcon.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -22,7 +23,7 @@ const formatted = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'lo
       <h1>{title}</h1>
       <p class="lead">{description}</p>
       <div class="meta">
-        <ul class="tags">{tags.map((t) => <li class="tag">{t}</li>)}</ul>
+        <ul class="tags">{tags.map((t) => <li class="tag"><TechIcon name={t} size={12} /> {t}</li>)}</ul>
         <div class="cta">
           {live && <a class="btn btn-accent" href={live} target="_blank" rel="noopener">View live <span class="arrow">→</span></a>}
           {repo && <a class="btn" href={repo} target="_blank" rel="noopener">Source code</a>}
