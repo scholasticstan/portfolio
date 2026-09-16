@@ -1,16 +1,24 @@
 ---
 import { site } from '../data/site';
+import Icon from './Icon.astro';
 const year = new Date().getFullYear();
 ---
-
 <footer class="footer">
   <div class="container inner">
-    <span>© {year} {site.name}. All rights reserved.</span>
-    <span class="built">Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>. No trackers, no cookies.</span>
+    <span>© {year} {site.name}</span>
+    <span class="links">
+      <a href={site.github} target="_blank" rel="noopener" aria-label="GitHub"><Icon name="github" size={16} /></a>
+      <a href={site.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><Icon name="linkedin" size={16} /></a>
+      {site.twitter && <a href={site.twitter} target="_blank" rel="noopener" aria-label="X"><Icon name="x" size={14} /></a>}
+      <a href={`mailto:${site.email}`} aria-label="Email"><Icon name="mail" size={16} /></a>
+    </span>
+    <span>Built with <a href="https://astro.build" target="_blank" rel="noopener">Astro</a>. No trackers, no cookies.</span>
   </div>
 </footer>
-
 <style>
-  .footer { border-top: 1px solid var(--border); padding: 2rem 0; color: var(--text-dim); font-size: 0.85rem; }
+  .footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2rem; color: var(--dim); font-size: 0.8rem; font-family: var(--mono); }
   .inner { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .footer a { color: var(--muted); }
+  .links { display: inline-flex; gap: 0.9rem; align-items: center; }
+  .links a:hover { color: var(--accent); }
 </style>

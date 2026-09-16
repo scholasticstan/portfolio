@@ -2,43 +2,55 @@
 import { site } from '../data/site';
 ---
 
-<section class="section" id="about">
-  <div class="container about-grid">
-    <div class="section-head reveal">
-      <div class="eyebrow">About</div>
-      <h2>Frontend by trade. Curious about the layers underneath.</h2>
+<section class="section about" id="about">
+  <div class="container grid">
+    <div class="left reveal">
+      <div class="kicker">About</div>
+      <h2>Who I am,<br /><span class="soft">and what I am looking for.</span></h2>
     </div>
-    <div class="about-body reveal">
-      <p>
-        I'm {site.name}, a frontend developer in {site.location}. I work at
-        <a href={site.company.url} target="_blank" rel="noopener">{site.company.name}</a> on the web app, and before that I
-        freelanced, building React sites and small apps for clients.
+    <div class="right reveal" data-delay="1">
+      <p class="big">
+        I'm {site.name}, a frontend engineer in {site.location}. I founded
+        <a href={site.company.url} target="_blank" rel="noopener">{site.company.name}</a>, a live gift-card-to-naira
+        exchange, and I take on contract builds like the Bethadel Media site. I am looking for a full-time role.
       </p>
       <p>
-        I came to the web through the ALX software engineering programme, which starts you in C and Linux before it
-        lets you near a browser. Writing a shell and a printf implementation changed how I read framework code: I want to
-        know what the abstraction is hiding. That is why my latest project, LinkBolt, has notes on why it uses a 302 and
-        not a 301, and why the click is recorded after the response goes out.
+        What I want: a team that ships to real users, reviews code properly, and lets an engineer own a feature from
+        the ticket to production. Frontend-leaning is ideal, full-stack is fine. Remote across EMEA works; so does Lagos or Abuja.
+        Running my own product taught me what it costs when something breaks, which is why I test.
       </p>
       <p>
-        Day to day that means React and TypeScript, Node, Postgres or MongoDB, Tailwind, tests that run in CI, and
-        readable pull requests. I like small teams where I can own a feature from the ticket to production.
+        How I got here: the ALX software engineering programme, which starts in C and Linux, then freelance React work
+        for clients, then Payroid. The systems background is the reason my latest project has a README that explains
+        its redirect strategy instead of a list of features.
       </p>
-      <ul class="facts">
-        <li><span>Based in</span><strong>{site.location}</strong></li>
-        <li><span>Focus</span><strong>React, TypeScript, Node, Postgres</strong></li>
-        <li><span>Currently</span><strong>Frontend Developer at {site.company.name}</strong></li>
-      </ul>
+      <p>
+        If you want to see how I think before you book a call, read the
+        <a href="/projects/linkbolt/">LinkBolt case study</a>. It is the closest thing to a work sample I can show
+        without a client's permission.
+      </p>
+      <dl class="facts">
+        <div><dt>Based in</dt><dd>{site.location}</dd></div>
+        <div><dt>Status</dt><dd>Available now</dd></div> <!-- TODO: add notice period, e.g. "2 weeks notice" -->
+        <div><dt>Looking for</dt><dd>Frontend / full-stack · remote (EMEA) or Nigeria</dd></div>
+        <div><dt>Education</dt><dd>University of Benin · ALX SE</dd></div>
+      </dl>
     </div>
   </div>
 </section>
 
 <style>
-  .about-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 3rem; }
-  .about-body { color: var(--text-muted); font-size: 1.05rem; }
-  .facts { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 0.75rem; }
-  .facts li { display: grid; grid-template-columns: 110px 1fr; border-top: 1px solid var(--border); padding-top: 0.75rem; }
-  .facts span { font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); }
-  .facts strong { color: var(--text); font-weight: 600; }
-  @media (max-width: 800px) { .about-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
+  .about { border-top: 1px solid var(--line); }
+  .grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 3rem; }
+  h2 { font-size: clamp(2.2rem, 4.5vw, 3.6rem); position: sticky; top: 6rem; }
+  .soft { color: var(--dim); }
+  .right { display: grid; gap: 1.25rem; color: var(--muted); font-size: 1.05rem; }
+  .big { font-size: clamp(1.2rem, 2vw, 1.5rem); color: var(--text); line-height: 1.4; font-family: var(--display); font-weight: 500; letter-spacing: -0.01em; }
+  .big a { border-bottom: 2px solid var(--accent); }
+  .right p a:not(.big a) { color: var(--text); }
+  .facts { margin: 1rem 0 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .facts div { border-top: 1px solid var(--line); padding-top: 0.75rem; }
+  dt { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+  dd { margin: 0.2rem 0 0; color: var(--text); font-weight: 500; }
+  @media (max-width: 800px) { .grid { grid-template-columns: 1fr; gap: 1.5rem; } h2 { position: static; } }
 </style>

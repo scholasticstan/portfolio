@@ -2,53 +2,43 @@
 import { skillGroups, tools } from '../data/skills';
 ---
 
-<section class="section" id="skills">
+<section class="section skills" id="skills">
   <div class="container">
     <div class="section-head reveal">
-      <div class="eyebrow">Skills</div>
-      <h2>What I work with.</h2>
-      <p class="lead">Grouped by layer. The bars are my own rating, and a 3 means I have shipped with it but would still open the docs.</p>
+      <div><div class="kicker">Skills</div><h2>What I work with.</h2></div>
+      <p>Grouped by layer. Bold means I use it every week; the rest I have shipped with but would still open the docs.</p>
     </div>
-
     <div class="groups">
-      {skillGroups.map((g) => (
-        <article class="card reveal">
-          <h3>{g.title}</h3>
+      {skillGroups.map((g, gi) => (
+        <div class="group reveal" data-delay={String(gi % 3 + 1)}>
+          <div class="ghead"><span class="num">0{gi + 1}</span><h3>{g.title}</h3></div>
           <p class="desc">{g.description}</p>
-          <ul class="skill-list">
-            {g.skills.map((s) => (
-              <li>
-                <div class="row">
-                  <span>{s.name}</span>
-                  <span class="lvl" aria-label={`${s.level} out of 5`}>{s.level}/5</span>
-                </div>
-                <div class="bar" role="presentation"><span style={`--w:${(s.level / 5) * 100}%`}></span></div>
-              </li>
-            ))}
+          <ul>
+            {g.skills.map((s) => <li class:list={['chip', { strong: s.level >= 4 }]}>{s.name}</li>)}
           </ul>
-        </article>
+        </div>
       ))}
     </div>
-
     <div class="tools reveal">
-      <span class="tools-label">Also fluent with</span>
-      <ul>{tools.map((t) => <li class="tag">{t}</li>)}</ul>
+      <span class="label">Also</span>
+      {tools.map((t) => <span class="chip faint">{t}</span>)}
     </div>
   </div>
 </section>
 
 <style>
-  .groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
-  .desc { color: var(--text-muted); font-size: 0.95rem; }
-  .skill-list { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.7rem; }
-  .row { display: flex; justify-content: space-between; font-size: 0.92rem; margin-bottom: 0.3rem; }
-  .lvl { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); }
-  .bar { height: 6px; background: var(--border); border-radius: 999px; overflow: hidden; }
-  .bar span { display: block; height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width 0.9s cubic-bezier(.2,.8,.2,1); }
-  :global(.reveal.in) .bar span { width: var(--w); }
-  .tools { margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
-  .tools-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; }
-  .tools ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  @media (max-width: 800px) { .groups { grid-template-columns: 1fr; } }
-  @media (prefers-reduced-motion: reduce) { .bar span { transition: none; width: var(--w); } }
+  .skills { border-top: 1px solid var(--line); }
+  .groups { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .group { background: color-mix(in srgb, var(--bg) 80%, transparent); padding: 1.75rem; display: grid; gap: 0.75rem; align-content: start; }
+  .ghead { display: flex; align-items: baseline; gap: 0.75rem; }
+  .num { font-family: var(--mono); color: var(--accent); font-size: 0.8rem; }
+  h3 { font-size: 1.5rem; }
+  .desc { color: var(--dim); font-size: 0.9rem; }
+  ul { list-style: none; padding: 0; margin: 0.25rem 0 0; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+  .chip { font-size: 0.85rem; padding: 0.4rem 0.75rem; border-radius: 999px; border: 1px solid var(--line-2); color: var(--muted); }
+  .chip.strong { color: var(--text); border-color: color-mix(in srgb, var(--accent) 60%, transparent); background: color-mix(in srgb, var(--accent) 10%, transparent); font-weight: 600; }
+  .chip.faint { font-size: 0.78rem; color: var(--dim); }
+  .tools { margin-top: 1.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem; }
+  .label { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); margin-right: 0.5rem; }
+  @media (max-width: 760px) { .groups { grid-template-columns: 1fr; } }
 </style>

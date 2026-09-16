@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import LinkBoltMock from '../../components/LinkBoltMock.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -9,43 +10,46 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, description, tags, repo, live, accent, date } = project.data;
+const { title, description, tags, repo, live, date } = project.data;
 const formatted = date.toLocaleDateString('en-GB', { year: 'numeric', month: 'long' });
 ---
 
 <Base title={title} description={description}>
-  <article class="container project" style={`--pc:${accent}`}>
+  <article class="container project">
     <a class="back" href="/#projects">← All projects</a>
     <header class="head">
-      <div class="eyebrow">Case study · {formatted}</div>
+      <div class="kicker">Case study · {formatted}</div>
       <h1>{title}</h1>
       <p class="lead">{description}</p>
-      <ul class="tags">{tags.map((t) => <li class="tag">{t}</li>)}</ul>
-      <div class="cta">
-        {live && <a class="btn btn-primary" href={live} target="_blank" rel="noopener">View live ↗</a>}
-        {repo && <a class="btn" href={repo} target="_blank" rel="noopener">Source code ↗</a>}
+      <div class="meta">
+        <ul class="tags">{tags.map((t) => <li class="tag">{t}</li>)}</ul>
+        <div class="cta">
+          {live && <a class="btn btn-accent" href={live} target="_blank" rel="noopener">View live <span class="arrow">→</span></a>}
+          {repo && <a class="btn" href={repo} target="_blank" rel="noopener">Source code</a>}
+        </div>
       </div>
     </header>
-    <div class="prose">
-      <Content />
-    </div>
+    {project.id === 'linkbolt' && <div class="mock static reveal in"><LinkBoltMock /></div>}
+    <div class="prose"><Content /></div>
   </article>
 </Base>
 
 <style>
-  .project { padding: 3rem 0 5rem; max-width: 760px; }
-  .back { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); }
-  .head { margin: 1.5rem 0 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-  .head h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
-  .head .eyebrow { color: var(--pc); }
-  .head .eyebrow::before { background: var(--pc); }
-  .tags { list-style: none; padding: 0; margin: 0 0 1.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
-  .tags .tag { --accent: var(--pc); }
-  .cta { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .prose { color: var(--text-muted); font-size: 1.05rem; }
-  .prose :global(h2) { color: var(--text); font-size: 1.5rem; margin-top: 2.5rem; }
-  .prose :global(h3) { color: var(--text); margin-top: 2rem; }
+  .project { padding: clamp(7rem, 12vw, 9rem) 0 6rem; max-width: 820px; }
+  .back { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+  .head { margin: 1.5rem 0 2.5rem; }
+  h1 { font-size: clamp(3rem, 8vw, 5.5rem); letter-spacing: -0.04em; }
+  .lead { color: var(--muted); font-size: clamp(1.1rem, 2vw, 1.35rem); margin-top: 1.25rem; max-width: 60ch; line-height: 1.5; }
+  .meta { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .cta { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .mock { margin-bottom: 3rem; }
+  .prose { color: var(--muted); font-size: 1.05rem; line-height: 1.7; }
+  .prose :global(h2) { color: var(--text); font-size: 1.8rem; margin: 2.5rem 0 0.75rem; }
+  .prose :global(h3) { color: var(--text); font-size: 1.25rem; margin: 2rem 0 0.5rem; }
+  .prose :global(p) { margin: 0 0 1rem; }
   .prose :global(strong) { color: var(--text); }
-  .prose :global(ul), .prose :global(ol) { padding-left: 1.3rem; display: grid; gap: 0.4rem; }
-  .prose :global(a) { color: var(--pc); }
+  .prose :global(ul), .prose :global(ol) { padding-left: 1.3rem; margin: 0 0 1rem; display: grid; gap: 0.4rem; }
+  .prose :global(li::marker) { color: var(--accent); }
+  .prose :global(a) { color: var(--text); border-bottom: 1px solid var(--accent); }
 </style>

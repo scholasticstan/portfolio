@@ -1,33 +1,168 @@
 ---
 import { getCollection } from 'astro:content';
-import ProjectCard from './ProjectCard.astro';
-
+import LinkBoltMock from './LinkBoltMock.astro';
 const all = (await getCollection('projects')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const featured = all.filter((p) => p.data.featured);
-const rest = all.filter((p) => !p.data.featured);
+const byId = Object.fromEntries(all.map((p) => [p.id, p]));
+const lb = byId['linkbolt'];
+const pay = byId['payroid'];
+const beth = byId['bethadel-media'];
+const shell = byId['simple-shell'];
+const bnb = byId['airbnb-clone'];
+const rest = all.filter((p) => !['linkbolt', 'payroid', 'bethadel-media', 'simple-shell', 'airbnb-clone'].includes(p.id));
+const shellLines = [
+  ['$', './hsh'],
+  ['(hsh) $', 'ls -la /tmp | head -3'],
+  ['', 'drwxrwxrwt  14 root  wheel   448 Sep 16 10:04 .'],
+  ['(hsh) $', 'echo $$ && env | grep HOME'],
+  ['', '48213'],
+  ['', 'HOME=/home/stanley'],
+  ['(hsh) $', 'exit 0'],
+];
 ---
 
 <section class="section" id="projects">
   <div class="container">
     <div class="section-head reveal">
-      <div class="eyebrow">Projects</div>
-      <h2>Things I have built.</h2>
-      <p class="lead">One product I built from scratch this year, and the systems work from ALX that shaped how I build. Every entry links to the source.</p>
+      <div><div class="kicker">Work</div><h2>Things I have built.</h2></div>
+      <p>A fintech I founded, a client site shipped in a week, a product built for this portfolio, and the systems work from ALX that shaped how I build.</p>
     </div>
 
-    <div class="grid featured">{featured.map((p) => <ProjectCard project={p} />)}</div>
-    {rest.length > 0 && (
-      <>
-        <h3 class="more reveal">More projects</h3>
-        <div class="grid">{rest.map((p) => <ProjectCard project={p} />)}</div>
-      </>
-    )}
+    <div class="bento">
+      <a href={`/projects/${pay.id}/`} class="cell pay card reveal">
+        <div class="cell-head"><span class="tag hi">Founder</span><span class="year">Live</span></div>
+        <h3>{pay.data.title}</h3>
+        <p>{pay.data.description}</p>
+        <ul class="facts" aria-hidden="true">
+          <li><b>100+</b><span>gift card brands</span></li>
+          <li><b>Naira</b><span>paid to the user's bank</span></li>
+          <li><b>Bills</b><span>airtime, data, power, cable</span></li>
+        </ul>
+        <ul class="tags">{pay.data.tags.map((t) => <li class="tag">{t}</li>)}</ul>
+        <span class="go">Case study <span class="arrow">→</span></span>
+      </a>
+
+      <a href={`/projects/${beth.id}/`} class="cell beth card reveal" data-delay="1">
+        <div class="cell-head"><span class="tag">Contract · Live</span><span class="year">{beth.data.date.getFullYear()}</span></div>
+        <h3>{beth.data.title}</h3>
+        <p>{beth.data.description}</p>
+        <ul class="ship" aria-hidden="true">
+          <li>Gallery with albums and photostream</li>
+          <li>Serverless contact form with Resend</li>
+          <li>Edge middleware launch gating</li>
+          <li>66 commits, brief to live in a week</li>
+        </ul>
+        <ul class="tags">{beth.data.tags.slice(0, 4).map((t) => <li class="tag">{t}</li>)}</ul>
+        <span class="go">Case study <span class="arrow">→</span></span>
+      </a>
+
+      <a href={`/projects/${lb.id}/`} class="cell lb card reveal">
+        <div class="cell-head">
+          <span class="tag hi">Featured</span>
+          <span class="year">{lb.data.date.getFullYear()}</span>
+        </div>
+        <h3>{lb.data.title}</h3>
+        <p>{lb.data.description}</p>
+        <ul class="tags">{lb.data.tags.slice(0, 5).map((t) => <li class="tag">{t}</li>)}</ul>
+        <div class="mockwrap"><LinkBoltMock compact /></div>
+        <span class="go">Case study <span class="arrow">→</span></span>
+      </a>
+
+      <a href={`/projects/${shell.id}/`} class="cell sh card reveal" data-delay="1">
+        <div class="cell-head"><span class="tag">C · Linux</span><span class="year">{shell.data.date.getFullYear()}</span></div>
+        <h3>{shell.data.title}</h3>
+        <p>A Unix shell written from the man pages. fork, execve, PATH lookup, built-ins, chaining.</p>
+        <pre class="term" aria-hidden="true">{shellLines.map(([p, t], i) => <span class="tl" style={`--i:${i}`}><b>{p}</b> {t}</span>)}<span class="cur"></span></pre>
+        <span class="go">Case study <span class="arrow">→</span></span>
+      </a>
+
+      <a href={`/projects/${bnb.id}/`} class="cell bnb card reveal" data-delay="2">
+        <div class="cell-head"><span class="tag">Python · Flask · MySQL</span><span class="year">{bnb.data.date.getFullYear()}</span></div>
+        <h3>{bnb.data.title}</h3>
+        <p>Four versions: console, MySQL storage, REST API, dynamic front end.</p>
+        <pre class="json" aria-hidden="true"><code>GET /api/v1/places/9f3c
+{"{"}
+  "name": "Lekki loft",
+  "city_id": "lag-01",
+  "price_by_night": 35000,
+  "amenities": ["wifi", "ac"]
+{"}"}</code></pre>
+        <span class="go">Case study <span class="arrow">→</span></span>
+      </a>
+
+      {rest.map((p, i) => (
+        <a href={`/projects/${p.id}/`} class="cell small card reveal" data-delay={String((i % 3) + 1)}>
+          <div class="cell-head"><span class="tag">{p.data.tags[0]}</span><span class="year">{p.data.date.getFullYear()}</span></div>
+          <h3>{p.data.title}</h3>
+          <p>{p.data.description}</p>
+          <span class="go">Case study <span class="arrow">→</span></span>
+        </a>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
-  .more { margin: 2.5rem 0 1rem; color: var(--text-muted); font-size: 1rem; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.1em; }
-  @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
+  .bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+  .cell { position: relative; display: flex; flex-direction: column; gap: 0.75rem; padding: 1.5rem; transition: transform 0.25s cubic-bezier(.2,.8,.2,1), border-color 0.25s; overflow: hidden; }
+  .cell:hover { transform: translateY(-4px); border-color: var(--line-2); }
+  .cell::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(420px 220px at var(--mx, 50%) var(--my, 0%), color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%); opacity: 0; transition: opacity 0.3s; }
+  .cell:hover::after { opacity: 1; }
+  .pay, .beth { grid-column: span 3; }
+  .pay { border-color: transparent; background:
+    linear-gradient(var(--card-solid), var(--card-solid)) padding-box,
+    linear-gradient(135deg, rgba(157,140,255,0.7), rgba(94,231,242,0.3), rgba(255,255,255,0.06)) border-box; }
+  .pay:hover { border-color: transparent; }
+  .facts { list-style: none; padding: 0; margin: 0.5rem 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+  .facts li { background: rgba(255,255,255,0.03); border: 1px solid var(--line); border-radius: 12px; padding: 0.7rem 0.8rem; display: grid; }
+  .facts b { font-family: var(--display); font-size: 1.4rem; letter-spacing: -0.02em; color: var(--text); }
+  .facts span { font-size: 0.75rem; color: var(--dim); }
+  .ship { list-style: none; padding: 0; margin: 0.5rem 0; display: grid; gap: 0.4rem; font-size: 0.9rem; color: var(--muted); }
+  .ship li { position: relative; padding-left: 1.1rem; }
+  .ship li::before { content: ''; position: absolute; left: 0; top: 0.5em; width: 6px; height: 6px; border-radius: 2px; background: var(--grad); }
+  .lb { grid-column: span 4; grid-row: span 2; border-color: transparent; background:
+    linear-gradient(var(--card-solid), var(--card-solid)) padding-box,
+    linear-gradient(135deg, rgba(157,140,255,0.6), rgba(94,231,242,0.35), rgba(255,255,255,0.06)) border-box; }
+  .lb:hover { border-color: transparent; }
+  .sh { grid-column: span 2; }
+  .bnb { grid-column: span 2; }
+  .small { grid-column: span 2; }
+  .cell-head { display: flex; justify-content: space-between; align-items: center; }
+  .tag.hi { background: var(--grad); color: #fff; border-color: transparent; }
+  .year { font-family: var(--mono); font-size: 0.75rem; color: var(--dim); }
+  h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .lb h3 { font-size: clamp(2.2rem, 4vw, 3.4rem); }
+  p { color: var(--muted); font-size: 0.95rem; max-width: 60ch; }
+  .tags { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .mockwrap { margin-top: auto; padding-top: 0.5rem; }
+  .go { margin-top: auto; font-weight: 600; font-size: 0.9rem; color: var(--text); display: inline-flex; gap: 0.4rem; }
+  .arrow { transition: transform 0.15s; }
+  .cell:hover .arrow { transform: translateX(4px); }
+
+  .term, .json { margin: 0.25rem 0 0; font-size: 0.75rem; line-height: 1.6; background: rgba(0,0,0,0.35); }
+  .term { display: grid; }
+  .tl { opacity: 0; transform: translateY(4px); transition: opacity 0.3s, transform 0.3s; transition-delay: calc(0.4s + var(--i) * 0.35s); white-space: pre-wrap; }
+  .tl b { color: var(--accent-2); font-weight: 500; }
+  :global(.in) .tl { opacity: 1; transform: none; }
+  .cur { display: inline-block; width: 7px; height: 0.95em; background: var(--accent-2); animation: blink 1s steps(2) infinite; margin-top: 2px; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .json code { color: var(--muted); }
+
+  @media (max-width: 900px) { .lb, .pay, .beth { grid-column: span 6; } .sh, .bnb, .small { grid-column: span 3; } }
+  @media (max-width: 600px) { .sh, .bnb, .small { grid-column: span 6; } .facts { grid-template-columns: 1fr; } }
 </style>
+
+<script>
+  function initSpot() {
+    document.querySelectorAll<HTMLElement>('.cell').forEach((el) => {
+      if (el.dataset.bound) return;
+      el.dataset.bound = '1';
+      el.addEventListener('pointermove', (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+        el.style.setProperty('--my', `${e.clientY - r.top}px`);
+      });
+    });
+  }
+  initSpot();
+  document.addEventListener('astro:page-load', initSpot);
+</script>

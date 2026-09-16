@@ -7,18 +7,29 @@ export type Experience = {
   highlights: string[];
 };
 
-// TODO: LinkedIn hides titles and dates from the public profile. Check these.
 export const experience: Experience[] = [
   {
-    role: 'Frontend Developer',
+    role: 'Founder & Lead Engineer',
     company: 'Payroid',
     url: 'https://payroid.co/',
-    period: 'Present',
-    summary: 'Payroll and payments product. I work on the web app.',
+    period: 'Present', // TODO: add the founding year, e.g. "2025 – Present"
+    summary: 'Gift card to naira exchange and bill payments. My company; I designed and built the product.',
     highlights: [
-      'Build and maintain React screens for customers and internal staff.',
-      'Work with the backend team on API contracts so features ship in one go.',
-      'Keep the UI consistent and quick on the low-end Android phones most users have.',
+      'Built the web app end to end: card submission, rate and fee confirmation, signed receipts, bank payouts, bill payments.',
+      'Run the product day to day: pricing, card review, support, and what ships next.',
+      'Live and taking real trades; mobile apps are the next release.',
+    ],
+  },
+  {
+    role: 'Contract Web Developer',
+    company: 'Bethadel Media Limited',
+    url: 'https://www.bethadelmedia.com',
+    period: 'Sep 2026',
+    summary: 'Company website for a Lagos event production firm. Built from scratch and shipped in a week.',
+    highlights: [
+      'Astro and Tailwind on Vercel: home, about, services, gallery with albums and a photostream, legal pages, sitemap.',
+      'Contact form on a serverless function with Resend: validation, honeypot, team notification and an acknowledgment email.',
+      'Edge middleware that gates launch by hostname and marks preview deployments noindex.',
     ],
   },
   {
@@ -29,7 +40,6 @@ export const experience: Experience[] = [
     highlights: [
       'React front ends with Tailwind, Firebase and REST APIs.',
       'Took projects from the first call to deployment and handover.',
-      'Learned to scope work, write it down, and say no to the fourth revision.',
     ],
   },
   {
@@ -41,7 +51,6 @@ export const experience: Experience[] = [
     highlights: [
       'Wrote a Unix shell and a printf implementation in C, with a teammate, from the man pages.',
       'Built the AirBnB clone through four versions: console, file and MySQL storage, Flask, REST API, dynamic front end.',
-      'Final project: a task scheduling web app with its own REST API.',
     ],
   },
 ];
