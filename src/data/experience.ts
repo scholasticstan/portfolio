@@ -33,13 +33,23 @@ export const experience: Experience[] = [
     ],
   },
   {
-    role: 'Freelance Frontend Developer',
-    company: 'Self-employed',
-    period: 'Before Payroid',
-    summary: 'Websites and small web apps for clients, mostly on the MERN stack.',
+    role: 'Frontend Developer',
+    company: 'ManandMicrobes',
+    period: 'Aug 2023 – Mar 2024',
+    summary: 'Freelance, remote. Front end for a science blog with a PHP back end.',
     highlights: [
-      'React front ends with Tailwind, Firebase and REST APIs.',
-      'Took projects from the first call to deployment and handover.',
+      'Built the UI components for the blog in React and tuned re-renders so the reading experience stayed quick.',
+      'Server-side rendering in PHP for SEO and first-paint speed, working alongside the backend developer.',
+    ],
+  },
+  {
+    role: 'Web Developer',
+    company: 'Zero Pest NG',
+    period: '2019 – 2020, then Sep 2021 – Jun 2023',
+    summary: 'Pest control company in Nigeria. Hybrid internship, later the site’s developer.',
+    highlights: [
+      'Built the company website front end in React: responsive layouts, interactive elements, SEO basics.',
+      'Worked directly with the owners to turn business requirements into pages.',
     ],
   },
   {
