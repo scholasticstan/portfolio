@@ -26,12 +26,12 @@ export const nav = [
 
 // What an employer gets. Every line is backed by something in the repos.
 export const offer = [
-  { title: 'Whole products, not just screens', body: 'Payroid is a live fintech I founded and built: customer app, operator console and Flutter app, about 94k lines. The Bethadel Media site went from brief to launch in a week. LinkBolt has a UI, server actions, a Postgres schema and a JSON API.' },
-  { title: 'Tests and CI from the first commit', body: '33 tests, unit and integration, run in GitHub Actions on every push with a real Postgres service. Lint, typecheck, build. Nothing merges red.' },
+  { title: 'Whole products, not just screens', body: '<a href="/projects/payroid/">Payroid</a> is a live fintech I founded and built: customer app, operator console and Flutter app, about 94k lines. The <a href="/projects/bethadel-media/">Bethadel Media site</a> went from brief to launch in a week. <a href="/projects/linkbolt/">LinkBolt</a> has a UI, server actions, a Postgres schema and a JSON API.' },
+  { title: 'Tests and CI from the first commit', body: '<a href="https://github.com/scholasticstan/linkbolt/actions" target="_blank" rel="noopener">33 tests</a>, unit and integration, run in GitHub Actions on every push with a real Postgres service. Lint, typecheck, build. Nothing merges red.' },
   { title: 'Performance decisions I can explain', body: 'Redirects answer from a bounded cache and record the click after the response is sent. I can tell you why it is a 302 and not a 301, and what that costs.' },
   { title: 'Foundations below the framework', body: 'I wrote a Unix shell and printf in C during ALX. When a React abstraction leaks, I know what it is hiding.' },
   { title: 'Readable code, readable PRs', body: 'Small commits, comments that say why, READMEs that list the trade-offs. The next engineer should not need me in the room.' },
-  { title: 'Product sense', body: 'Payroid locks the rate at submit and refuses a KYC backdoor for app reviewers. LinkBolt counts bots separately and hashes visitors instead of storing IPs. Details a user notices.' },
+  { title: 'Product sense', body: '<a href="/projects/payroid/">Payroid</a> locks the rate at submit and refuses a KYC backdoor for app reviewers. <a href="/projects/linkbolt/">LinkBolt</a> counts bots separately and hashes visitors instead of storing IPs. Details a user notices.' },
 ];
 
 export const stats = [

@@ -27,7 +27,7 @@ Behind it: Postgres through Drizzle, web push, webhooks through Svix, per-compon
 
 ## Decisions I would defend
 
-**Three hosts, one app.** payroid.co, app.payroid.co and admin.payroid.co are served by one Next.js deployment. An edge proxy verifies the right session cookie with Web Crypto and rewrites to clean URLs, so users never see an `/app` prefix or an auth redirect.
+**Three hosts, one app.** [payroid.co](https://payroid.co), [app.payroid.co](https://app.payroid.co) and [admin.payroid.co](https://admin.payroid.co) are served by one Next.js deployment. An edge proxy verifies the right session cookie with Web Crypto and rewrites to clean URLs, so users never see an `/app` prefix or an auth redirect.
 
 **Lock the rate at submit.** Competitors quote after review, when the user can no longer walk away. Payroid shows the rate and fee first and holds it. It costs margin on volatile days and it is the whole pitch.
 

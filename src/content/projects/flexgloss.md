@@ -27,4 +27,4 @@ Playwright end-to-end tests cover the home page, booking, shop and admin flows. 
 
 ## Status
 
-Live at flexgloss.vercel.app. The source is private at the owner's request.
+Live at [flexgloss.vercel.app](https://flexgloss.vercel.app). The source is private at the owner's request.

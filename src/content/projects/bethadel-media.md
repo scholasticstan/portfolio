@@ -20,6 +20,8 @@ Bethadel Media Limited does LED walls, sound, live streaming and stage design fo
 - **Theme switcher**, mega menu, partner logo marquee, WhatsApp button, back-to-top, share pills.
 - **Performance and SEO**: immutable cache headers for images, video and downloads; a permanent redirect from the bare domain to www; clean URLs; Open Graph tags.
 
+Live at [bethadelmedia.com](https://www.bethadelmedia.com).
+
 ## How it went
 
 Sixty-six commits between 14 and 16 September 2026, from first commit to live. All content lives in typed data files, so the client edits services, partners and gallery albums without touching components.

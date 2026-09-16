@@ -69,7 +69,7 @@ const shellLines = [
       </a>
 
       <a href={`/projects/${shell.id}/`} class="cell sh card reveal" data-delay="1">
-        <div class="cell-head"><span class="tag">C · Linux</span><span class="year">{shell.data.date.getFullYear()}</span></div>
+        <div class="cell-head"><ul class="tags">{shell.data.tags.slice(0, 2).map((t) => <li class="tag"><TechIcon name={t} size={12} /> {t}</li>)}</ul><span class="year">{shell.data.date.getFullYear()}</span></div>
         <h3>{shell.data.title}</h3>
         <p>A Unix shell written from the man pages. fork, execve, PATH lookup, built-ins, chaining.</p>
         <pre class="term" aria-hidden="true">{shellLines.map(([p, t], i) => <span class="tl" style={`--i:${i}`}><b>{p}</b> {t}</span>)}<span class="cur"></span></pre>
@@ -77,7 +77,7 @@ const shellLines = [
       </a>
 
       <a href={`/projects/${bnb.id}/`} class="cell bnb card reveal" data-delay="2">
-        <div class="cell-head"><span class="tag">Python · Flask · MySQL</span><span class="year">{bnb.data.date.getFullYear()}</span></div>
+        <div class="cell-head"><ul class="tags">{bnb.data.tags.slice(0, 3).map((t) => <li class="tag"><TechIcon name={t} size={12} /> {t}</li>)}</ul><span class="year">{bnb.data.date.getFullYear()}</span></div>
         <h3>{bnb.data.title}</h3>
         <p>Four versions: console, MySQL storage, REST API, dynamic front end.</p>
         <pre class="json" aria-hidden="true"><code>GET /api/v1/places/9f3c
