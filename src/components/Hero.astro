@@ -7,7 +7,7 @@ const marquee = ['React', 'TypeScript', 'Next.js', 'Node.js', 'PostgreSQL', 'Dri
 
 <section class="hero" id="top">
   <div class="container">
-    {site.available && <p class="eyebrow enter"><span class="avail"><span class="dot"></span> Available now</span></p>}
+    {site.available && <p class="eyebrow enter"><span class="dot" role="img" aria-label="Available for work" title="Available for work"></span></p>}
     <h1 class="enter" style="--d:0.08s">
       <span class="line">Stanley</span>
       <span class="line">Alu<span class="period grad-text">.</span></span>
@@ -44,9 +44,8 @@ const marquee = ['React', 'TypeScript', 'Next.js', 'Node.js', 'PostgreSQL', 'Dri
   @keyframes enter { from { opacity: 0; transform: translateY(22px); } }
   .eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-bottom: 1.5rem; }
   .eyebrow a { color: var(--text); border-bottom: 1px solid var(--line-2); }
-  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--grad); box-shadow: 0 0 0 0 var(--accent); animation: pulse 2.2s infinite; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--grad); box-shadow: 0 0 0 0 var(--accent); animation: pulse 2.2s infinite; }
   @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); } 70% { box-shadow: 0 0 0 9px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
-  .avail { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.3rem 0.8rem 0.3rem 0.6rem; border-radius: 999px; background: color-mix(in srgb, var(--accent-2) 12%, transparent); color: var(--accent-2); border: 1px solid color-mix(in srgb, var(--accent-2) 35%, transparent); }
 
   h1 { font-size: clamp(4.2rem, 15vw, 12.5rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.86; display: grid; }
   .line { display: block; }
