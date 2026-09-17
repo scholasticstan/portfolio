@@ -10,7 +10,7 @@ import { site, nav } from '../data/site';
     </a>
     <nav aria-label="Primary">
       <ul id="nav-links" class="links">
-        {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        {nav.map((item) => <li><a href={item.href} class:list={{ hire: item.label === 'Hire me' }}>{item.label === 'Hire me' && site.available && <span class="live" aria-hidden="true"></span>}{item.label}</a></li>)}
       </ul>
     </nav>
     <div class="right">
@@ -68,6 +68,10 @@ import { site, nav } from '../data/site';
   .links { display: flex; gap: 0.15rem; list-style: none; margin: 0; padding: 0; }
   .links a { display: block; padding: 0.45rem 0.85rem; border-radius: 999px; font-size: 0.9rem; color: var(--muted); font-weight: 500; transition: background 0.15s, color 0.15s; }
   .links a:hover { color: var(--text); background: var(--line); }
+  .links a.hire { display: inline-flex; align-items: center; gap: 0.45rem; color: var(--text); }
+  .live { width: 7px; height: 7px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); animation: live 2.2s infinite; }
+  @keyframes live { 0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); } 70% { box-shadow: 0 0 0 7px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+  @media (prefers-reduced-motion: reduce) { .live { animation: none; } }
   .right { display: flex; gap: 0.25rem; }
   .icon { width: 34px; height: 34px; border-radius: 50%; border: 1px solid transparent; background: none; color: var(--muted); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; }
   .icon:hover { color: var(--text); background: var(--line); }

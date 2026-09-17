@@ -1,35 +1,36 @@
 ---
 import { site } from '../data/site';
 import LinkBoltMock from './LinkBoltMock.astro';
-import Icon from './Icon.astro';
 import TechIcon from './TechIcon.astro';
-const marquee = ['React', 'TypeScript', 'Next.js', 'Node.js', 'PostgreSQL', 'Drizzle', 'Tailwind', 'Astro', 'Vitest', 'GitHub Actions', 'Python', 'Flask', 'MySQL', 'C', 'Linux', 'MongoDB', 'Firebase'];
+const marquee = ['React', 'TypeScript', 'Next.js', 'Node.js', 'PostgreSQL', 'Drizzle', 'Tailwind', 'Astro', 'Vitest', 'GitHub Actions', 'Python', 'Flask', 'MySQL', 'C', 'Linux', 'MongoDB', 'Firebase', 'Flutter'];
 ---
 
 <section class="hero" id="top">
-  <div class="container">
-    {site.available && <p class="eyebrow enter"><span class="dot" role="img" aria-label="Available for work" title="Available for work"></span></p>}
-    <h1 class="enter" style="--d:0.08s">
-      <span class="line">Stanley</span>
-      <span class="line">Alu<span class="period grad-text">.</span></span>
-    </h1>
-    <div class="sub enter" style="--d:0.16s">
-      <p>
-        Frontend engineer and founder. I ship the whole feature:{' '}
-        <em>the interface, the API behind it, the database, the tests.</em>{' '}
-        Looking for a frontend or full-stack role. Remote across EMEA, or Nigeria. Available now.
+  <div class="container grid">
+    <div class="copy">
+      <h1 class="enter">
+        <span class="line">Stanley</span>
+        <span class="line">Alu<span class="period grad-text">.</span></span>
+      </h1>
+      <p class="pitch enter" style="--d:0.08s">
+        Frontend engineer and founder. I ship the interface, the API behind it, the database and the tests.
       </p>
-      <div class="cta">
-        <a class="btn btn-accent" href="/projects/linkbolt/">Read the LinkBolt case study <span class="arrow">→</span></a>
-        <a class="btn" href="#contact">Hire me</a>
-        <a class="btn" href={site.github} target="_blank" rel="noopener"><Icon name="github" size={16} /> GitHub</a>
+      {site.available && (
+        <p class="avail enter" style="--d:0.14s">Available now · remote across EMEA, or Nigeria</p>
+      )}
+      <div class="cta enter" style="--d:0.2s">
+        <a class="btn btn-accent" href="#contact">Hire me <span class="arrow">→</span></a>
+        <a class="btn" href="#projects">See the work</a>
       </div>
     </div>
-  </div>
 
-  <div class="container showcase enter in" style="--d:0.3s">
-    <div class="label"><p>LinkBolt, a link shortener with analytics that separate people from bots. Next.js, Postgres, 33 tests, CI on every push. Alongside <a href="/projects/payroid/">Payroid</a>, the fintech I founded, and the <a href="/projects/bethadel-media/">Bethadel Media</a> site.</p></div>
-    <LinkBoltMock />
+    <figure class="showcase enter in" style="--d:0.3s">
+      <LinkBoltMock />
+      <figcaption>
+        <a href="/projects/linkbolt/">LinkBolt</a>, a link shortener with analytics that separate people from bots.
+        Alongside <a href="/projects/payroid/">Payroid</a>, the fintech I founded, and the <a href="/projects/bethadel-media/">Bethadel Media</a> site.
+      </figcaption>
+    </figure>
   </div>
 
   <div class="marquee" aria-hidden="true">
@@ -40,40 +41,36 @@ const marquee = ['React', 'TypeScript', 'Next.js', 'Node.js', 'PostgreSQL', 'Dri
 </section>
 
 <style>
-  .hero { padding: clamp(7rem, 14vw, 11rem) 0 0; }
+  .hero { padding: clamp(6.5rem, 12vw, 9rem) 0 0; }
   .enter { animation: enter 0.8s cubic-bezier(.2,.7,.2,1) both; animation-delay: var(--d, 0s); }
   @keyframes enter { from { opacity: 0; transform: translateY(22px); } }
-  .eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-bottom: 1.5rem; }
-  .eyebrow a { color: var(--text); border-bottom: 1px solid var(--line-2); }
-  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--grad); box-shadow: 0 0 0 0 var(--accent); animation: pulse 2.2s infinite; }
-  @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 60%, transparent); } 70% { box-shadow: 0 0 0 9px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
 
-  h1 { font-size: clamp(4.2rem, 15vw, 12.5rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.86; display: grid; }
+  .grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+
+  h1 { font-size: clamp(3.6rem, 8.5vw, 7.6rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.88; display: grid; text-shadow: 0 30px 80px rgba(124, 98, 255, 0.25); }
   .line { display: block; }
-  .line:nth-child(2) { margin-left: clamp(0.5rem, 12vw, 10rem); }
+  .line:nth-child(2) { margin-left: clamp(0.5rem, 6vw, 4.5rem); }
   .period { color: var(--accent); }
-  h1 { text-shadow: 0 30px 80px rgba(124, 98, 255, 0.25); }
 
-  .sub { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: end; margin-top: 2.5rem; }
-  .sub p { font-size: clamp(1.15rem, 2vw, 1.5rem); color: var(--muted); line-height: 1.4; max-width: 30ch; }
-  .sub em { font-style: normal; color: var(--text); }
-  .cta { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: end; }
+  .pitch { margin-top: 1.75rem; font-size: clamp(1.1rem, 1.6vw, 1.35rem); color: var(--text); line-height: 1.45; max-width: 34ch; }
+  .avail { margin-top: 0.9rem; font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+  .cta { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.75rem; }
 
-  .showcase { margin-top: clamp(3rem, 6vw, 5rem); display: grid; grid-template-columns: 260px 1fr; gap: 2rem; align-items: end; }
-  .label p { color: var(--muted); font-size: 0.95rem; }
-  .label a { color: var(--text); border-bottom: 1px solid var(--line-2); }
+  .showcase { margin: 0; display: grid; gap: 0.9rem; }
+  figcaption { font-size: 0.9rem; color: var(--muted); line-height: 1.5; padding-inline: 0.25rem; }
+  figcaption a { color: var(--text); border-bottom: 1px solid var(--line-2); }
+  figcaption a:hover { border-color: var(--accent); }
 
-  .marquee { margin-top: clamp(3rem, 6vw, 5rem); border-block: 1px solid var(--line); overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+  .marquee { margin-top: clamp(3rem, 6vw, 5rem); border-block: 1px solid var(--line); border-image: linear-gradient(90deg, transparent, var(--line-2), transparent) 1; overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
   .track { display: flex; gap: 3rem; width: max-content; padding: 1rem 0; animation: scroll 40s linear infinite; }
   .track span { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--display); font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em; color: var(--dim); white-space: nowrap; }
   .track span:nth-child(3n) { color: var(--muted); }
-  .marquee { border-image: linear-gradient(90deg, transparent, var(--line-2), transparent) 1; }
   @keyframes scroll { to { transform: translateX(-50%); } }
 
-  @media (max-width: 900px) {
-    .sub { grid-template-columns: 1fr; }
-    .cta { justify-content: start; }
-    .showcase { grid-template-columns: 1fr; }
+  @media (max-width: 1080px) {
+    .grid { grid-template-columns: 1fr; }
+    h1 { font-size: clamp(3.6rem, 13vw, 8rem); }
+    .showcase { margin-top: 1rem; }
   }
-  @media (prefers-reduced-motion: reduce) { .dot, .track { animation: none; } }
+  @media (prefers-reduced-motion: reduce) { .track { animation: none; } }
 </style>
