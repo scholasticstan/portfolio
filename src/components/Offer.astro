@@ -3,17 +3,25 @@ import { offer } from '../data/site';
 ---
 
 <section class="section offer" id="offer">
-  <div class="container">
-    <div class="section-head reveal">
-      <div><h2>Why hire me.</h2></div>
-      <p>Six things that show up in your codebase when I join, each one checkable in a repository.</p>
+  <div class="container grid">
+    <div class="head reveal">
+      <h2>Why hire me.</h2>
+      <p>Six things that show up in your codebase when I join. Each one links to the evidence.</p>
     </div>
-    <ol class="grid">
+    <ol class="list">
       {offer.map((o, i) => (
         <li class="item reveal" data-delay={String(i % 3 + 1)}>
-          <span class="n">0{i + 1}</span>
-          <h3>{o.title}</h3>
-          <p set:html={o.body} />
+          <span class="n">{String(i + 1).padStart(2, '0')}</span>
+          <div class="body">
+            <h3>{o.title}</h3>
+            <p>{o.body}</p>
+            <ul class="proof">
+              {o.proof.map((pr) => {
+                const ext = pr.href.startsWith('http');
+                return <li><a href={pr.href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener' : undefined}>{pr.label}{ext && <span aria-hidden="true"> ↗</span>}</a></li>;
+              })}
+            </ul>
+          </div>
         </li>
       ))}
     </ol>
@@ -22,14 +30,24 @@ import { offer } from '../data/site';
 
 <style>
   .offer { border-top: 1px solid var(--line); }
-  .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
-  .item { background: color-mix(in srgb, var(--bg) 80%, transparent); padding: 1.75rem; display: grid; gap: 0.6rem; align-content: start; transition: background 0.2s; }
-  .item:hover { background: color-mix(in srgb, var(--bg-2) 85%, transparent); }
-  .n { font-family: var(--mono); color: var(--accent); font-size: 0.8rem; }
-  h3 { font-size: 1.35rem; }
-  p { color: var(--muted); font-size: 0.95rem; }
-  p :global(a) { color: var(--text); border-bottom: 1px solid var(--line-2); }
-  p :global(a:hover) { border-color: var(--accent); }
-  @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+  .grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+  .head { position: sticky; top: 6rem; }
+  .head h2 { font-size: clamp(2.4rem, 5vw, 4rem); }
+  .head p { color: var(--muted); margin-top: 1rem; max-width: 34ch; font-size: 1.05rem; }
+  .list { list-style: none; margin: 0; padding: 0; }
+  .item { display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; padding: 1.75rem 0; border-top: 1px solid var(--line); position: relative; }
+  .item:last-child { border-bottom: 1px solid var(--line); }
+  .item::before { content: ''; position: absolute; inset: 0 -1.25rem; border-radius: var(--radius); background: var(--card); opacity: 0; transition: opacity 0.25s; z-index: -1; }
+  .item:hover::before { opacity: 1; }
+  .n { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); padding-top: 0.45rem; }
+  h3 { font-size: clamp(1.25rem, 2vw, 1.6rem); letter-spacing: -0.02em; }
+  .body p { color: var(--muted); font-size: 1rem; line-height: 1.65; margin-top: 0.5rem; max-width: 62ch; }
+  .proof { list-style: none; margin: 0.9rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .proof a { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.8rem; font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 999px; border: 1px solid var(--line-2); color: var(--text); transition: border-color 0.15s, background 0.15s, transform 0.15s; }
+  .proof a:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); transform: translateY(-1px); }
+  @media (max-width: 900px) {
+    .grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .head { position: static; }
+    .item { grid-template-columns: 2.25rem 1fr; }
+  }
 </style>
