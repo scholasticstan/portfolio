@@ -47,6 +47,7 @@ export const experience: Experience[] = [
   {
     role: 'Frontend Developer',
     company: 'ManandMicrobes',
+    url: 'https://manandmicrobes.com',
     period: 'Aug 2023 – Mar 2024',
     summary: 'Freelance, remote. Front end for a science blog with a PHP back end.',
     highlights: [
